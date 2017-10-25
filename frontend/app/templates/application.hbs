@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="menu">
+    {{#link-to 'index'}}
+      <h1>
+        <em>app5</em>
+      </h1>
+    {{/link-to}}
+    <div class="links">
+      {{#link-to 'users'}}
+        users
+      {{/link-to}}
+    </div>
+  </div>
+
+  <div class="body">
+    {{outlet}}
+  </div>
+</div>

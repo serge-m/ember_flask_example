@@ -3,11 +3,12 @@
   {{#search-form 
     filter=(action 'filterByCity')
     as |rentals|}}
+    <p>{{rentals}} </p>
     <ul class="results">
     {{#each rentals as |rentalUnit|}}
       <li>id={{rentalUnit.id}}, info={{rentalUnit.info}}</li>
     {{/each}}
-  </ul>
+    </ul>
   {{/search-form}}
 
 {{outlet}}

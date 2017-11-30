@@ -5,9 +5,15 @@ foooo123123
 
 
 {{file-upload url="/api/upload" update_progress_bar=(action "update_progress_bar")}}
+
 ----
+
 {{ember-progress-bar progress=value}}
 
 start upload_results
 {{yield upload_results}}
 end upload_results
+
+{{#upload-results as |upl|}}
+{{upl}}
+{{/upload-results}}

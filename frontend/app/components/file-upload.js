@@ -3,6 +3,8 @@ import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 
 export default EmberUploader.FileField.extend({
+  value: 'default',
+  
   init() {
     this._super(...arguments);
     // this.get('filter')('').then((allResults) => {
@@ -24,7 +26,7 @@ export default EmberUploader.FileField.extend({
 
     uploader.on('progress', e => {
       let update_progress_bar = this.get('update_progress_bar');
-      update_progress_bar(e.percent);
+      update_progress_bar(e.percent).then((filterResults) => this.set('value', '123123'));
       console.log("progress -> " + e.percent);
 
     });

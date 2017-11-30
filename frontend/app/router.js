@@ -8,6 +8,8 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('users');
+  this.route('searchresults');
+  this.route('upload');
 });
 
 export default Router;

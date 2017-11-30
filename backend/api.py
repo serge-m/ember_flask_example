@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import request, send_from_directory
+import time 
 
 app = Flask(__name__, static_url_path='')
 
@@ -25,14 +26,35 @@ def users_by_id(user_id):
 
 @app.route('/api/users')
 def users():
+    city = request.args.get('city', '')
+    start = 0
+    try:
+        delay = int(city)
+        print("parsed delay {}".format(delay))
+        time.sleep(int(delay))
+        start = delay
+    except Exception as e:
+        print (e)
+        
+
+
     return jsonify({
-        "data": [u(i) for i in range(0,10)]
+        "data": [u(i) for i in range(start,start + 10)]
         })
 
 @app.route('/<path:path>')
 def send_js(path):
     return send_from_directory('', path)
 
+
+@app.route('/api/upload', methods=['POST'])
+def upload():
+    print(request.args)
+    print(request.files)
+    return jsonify({
+        "result":"ololo",
+        "data": request.args
+    })
 
 if __name__ == '__main__':
     print("use\n"

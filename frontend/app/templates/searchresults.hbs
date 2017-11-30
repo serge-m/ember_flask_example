@@ -1,0 +1,13 @@
+<h2>Search results</h2>
+
+  {{#search-form 
+    filter=(action 'filterByCity')
+    as |rentals|}}
+    <ul class="results">
+    {{#each rentals as |rentalUnit|}}
+      <li>id={{rentalUnit.id}}, info={{rentalUnit.info}}</li>
+    {{/each}}
+  </ul>
+  {{/search-form}}
+
+{{outlet}}

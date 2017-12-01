@@ -4,7 +4,7 @@ foooo123123
 
 
 
-{{file-upload url="/api/upload" update_progress_bar=(action "update_progress_bar")}}
+{{file-upload url="/api/upload" update_progress_bar=(action "update_progress_bar") set_upload_results=(action "set_upload_results")}}
 
 ----
 
@@ -14,6 +14,7 @@ start upload_results
 {{yield upload_results}}
 end upload_results
 
-{{#upload-results as |upl|}}
-{{upl}}
-{{/upload-results}}
+value= {{value}}
+
+upload_res = {{upload_res}}
+

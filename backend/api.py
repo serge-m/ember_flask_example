@@ -51,9 +51,13 @@ def send_js(path):
 def upload():
     print(request.args)
     print(request.files)
+    
     return jsonify({
-        "result":"ololo",
-        "data": request.args
+        "success": True,
+        "data": [
+            u(7777),
+            u(8888),
+        ]
     })
 
 if __name__ == '__main__':

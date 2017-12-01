@@ -16,5 +16,13 @@ end upload_results
 
 value= {{value}}
 
-upload_res = {{upload_res}}
-
+upload_result = {{upload_res.result}}
+{{#if upload_res}}
+    {{#if upload_res.success}}
+        {{#each upload_res.data as |rentalUnit|}}
+              <li>id={{rentalUnit.id}}, info={{rentalUnit.info}}, type={{rentalUnit.type}}</li>
+        {{/each}}
+    {{else}}
+        <h1>failed ({{upload_res.result}})</h1>
+    {{/if}}
+{{/if}}

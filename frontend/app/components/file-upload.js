@@ -22,13 +22,15 @@ export default EmberUploader.FileField.extend({
     if (!Ember.isEmpty(files)) {
       // this second argument is optional and can to be sent as extra data with the upload
       let res = uploader.upload(files[0], { "whatever": "something" });
-      // console.log(res);
+      console.log("upload result", res);
       // this.set('upload_results', [this.get('value')]);
     }
 
     uploader.on('progress', e => {
       let update_progress_bar = this.get('update_progress_bar');
+      let set_upload_results = this.get('set_upload_results');
       update_progress_bar(e.percent)//.then((filterResults) => console.log("got results" + filterResults.get('length')));
+      set_upload_results({})
       console.log("progress -> " + e.percent);
 
     });
@@ -39,6 +41,14 @@ export default EmberUploader.FileField.extend({
       console.log("didUpload -> ",  response['data']);
 
       set_upload_results(response);
+    });
+
+    uploader.on('didError', (jqXHR, textStatus, errorThrown) => {
+      let set_upload_results = this.get('set_upload_results');
+      console.log("didError -> ",  jqXHR);
+      console.log("didError -> ",  textStatus);
+      console.log("didError -> ",  errorThrown);
+      set_upload_results(jqXHR.responseJSON);
     });
   }
 });

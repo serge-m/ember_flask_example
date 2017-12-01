@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import jsonify
-from flask import request, send_from_directory
+from flask import request, send_from_directory, make_response
 import time 
 
 app = Flask(__name__, static_url_path='')
@@ -47,18 +47,34 @@ def send_js(path):
     return send_from_directory('', path)
 
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
 @app.route('/api/upload', methods=['POST'])
 def upload():
     print(request.args)
     print(request.files)
+
+    if 'file' not in request.files:
+        return make_response(jsonify({"success": False}), 400)
+
+    file = request.files['file']
+
+    if not allowed_file(file.filename):
+        return make_response(jsonify({"success": False, "error": "file type is not allowed"}), 400)        
     
-    return jsonify({
+    data = jsonify({
         "success": True,
         "data": [
             u(7777),
             u(8888),
         ]
     })
+    return make_response(data, 200)
 
 if __name__ == '__main__':
     print("use\n"

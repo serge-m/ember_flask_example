@@ -1,7 +1,4 @@
-foooo123123
-12312
-123123
-
+<p> page upl </p>
 
 
 {{file-upload url="/api/upload" update_progress_bar=(action "update_progress_bar") set_upload_results=(action "set_upload_results")}}
@@ -10,13 +7,9 @@ foooo123123
 
 {{ember-progress-bar progress=value}}
 
-start upload_results
-{{yield upload_results}}
-end upload_results
+<p>progress= {{value}}</p>
 
-value= {{value}}
 
-upload_result = {{upload_res.result}}
 {{#if upload_res}}
     {{#if upload_res.success}}
         {{#each upload_res.data as |rentalUnit|}}
@@ -24,5 +17,8 @@ upload_result = {{upload_res.result}}
         {{/each}}
     {{else}}
         <h1>failed ({{upload_res.result}})</h1>
+        <p>Error: ({{upload_res.error}})</p>
     {{/if}}
+{{else}}
+    <p>try it out</p>
 {{/if}}

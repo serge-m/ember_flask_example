@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request, send_from_directory, make_response
 import time 
+from PIL import Image
 
 app = Flask(__name__, static_url_path='')
 
@@ -67,6 +68,10 @@ def upload():
     if not allowed_file(file.filename):
         return make_response(jsonify({"success": False, "error": "file type is not allowed"}), 400)        
     
+
+    image = Image.open(file.stream)
+    image = image.resize((100, 100))
+    image.save("./1.jpg", "JPEG")
     data = jsonify({
         "success": True,
         "data": [
@@ -74,6 +79,7 @@ def upload():
             u(8888),
         ]
     })
+
     return make_response(data, 200)
 
 if __name__ == '__main__':
